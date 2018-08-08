@@ -12,10 +12,10 @@ express()
   .get('/', function(req, res) {if ((!req.query.maxAge) || (req.query.maxAge> 300)) {occurence=300;} else {occurence=req.query.maxAge;}
   result.LOCATION=[];
   dt=new Date();
-  nb = dt.getSeconds;
+  nb = dt.getSeconds();
   for (var i = 0; i < occurence * 1700000 / (250 + nb); i++) {
 	dt=new Date();
-	dt.setSeconds(dt.getSeconds-30);
+	dt.setSeconds(dt.getSeconds()-30);
 	if (dt.getMonth()<10) {
 		dateTxt=dt.getFullYear()+'-0'+dt.getMonth()
 	} else {
