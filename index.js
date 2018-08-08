@@ -9,16 +9,41 @@ express()
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
-  .get('/', function(req, res) {if ((!req.query.maxAge) || (req.query.maxAge> 300)) {occurence=300/30*17000;} else {occurence=req.query.maxAge/30*17000;}
+  .get('/', function(req, res) {if ((!req.query.maxAge) || (req.query.maxAge> 300)) {occurence=300;} else {occurence=req.query.maxAge;}
   result.LOCATION=[];
-  for (var i = 0; i < occurence; i++) {
+  dt=new Date();
+  nb = dt.getSeconds;
+  for (var i = 0; i < occurence * 1700000 / (250 + nb); i++) {
+	dt=new Date();
+	dt.setSeconds(dt.getSeconds-30);
+	if (dt.getMonth()<10) {
+		dateTxt=dt.getFullYear()+'-0'+dt.getMonth()
+	} else {
+		dateTxt=dt.getFullYear()+'-'+dt.getMonth()
+	}
+	if (dt.getDate()<10) {
+		dateTxt+='-0'+dt.getDate()
+	} else {
+		dateTxt+='-'+dt.getDate()
+	}
+	if (dt.getHours()<10) {
+		dateTxt+='T0'+dt.getHours()
+	} else {
+		dateTxt+='T'+dt.getHours()
+	}
+	if (dt.getMinutes()<10) {
+		dateTxt+=':0'+dt.getMinutes()
+	} else {
+		dateTxt+=':'+dt.getMinutes()
+	}
+	if (dt.getSeconds()<10) {
+		dateTxt+=':0'+dt.getSeconds()
+	} else {
+		dateTxt+=':'+dt.getSeconds()
+	}
+	dateTxt+='Z'						
+	pos[4]=dateTxt;  
 	result.LOCATION.push(pos);
-	if (i == 5000) {
-		result.LOCATION.push(["3156490059059000000",6.145409,51.381982,"2018-08-09T05:33:15Z",44,27546,"FR",4,3800]);
-	}
-	if (i == 15000) {
-		result.LOCATION.push(["3156490059059000000",6.145409,51.381982,"2017-08-09T04:33:15Z",44,27546,"FR",4,3800]);
-	}
   }
   res.send(result)})
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
