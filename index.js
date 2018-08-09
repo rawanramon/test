@@ -53,7 +53,7 @@ express()
 		}
 		dateTxt+='Z'						
 		
-		result.LOCATION.push(['"'+i+'"',6.145409,51.381982,dateTxt,44,27546,"FR",4,3800]);
+		result.LOCATION.push(["x"+i,6.145409,51.381982,dateTxt,44,27546,"FR",4,3800]);
 		
 	  }
 	  if (acceptEncoding == 'gzip') {
