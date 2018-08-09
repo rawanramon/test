@@ -59,8 +59,8 @@ express()
 	if (acceptEncoding = 'gzip') {
 		res.writeHead(200, {'Content-Encoding': 'gzip'});
 		zlib.gzip(result, function (_, resultzip) {  // The callback will give you the 
-			res.send('reultat en zip');
-			//res.send(resultzip);                     // result, so just send it.
+			//res.send('reultat en zip');
+			res.send(resultzip);                     // result, so just send it.
 		});
 	} else {
 		res.send(result);	
