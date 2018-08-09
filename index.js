@@ -53,16 +53,16 @@ express()
 		}
 		dateTxt+='Z'						
 		
-		result.LOCATION.push(["3156490059059000000",6.145409,51.381982,dateTxt,44,27546,"FR",4,3800]);
+		result.LOCATION.push(['"'+i+'"',6.145409,51.381982,dateTxt,44,27546,"FR",4,3800]);
 		
 	  }
 	  if (acceptEncoding == 'gzip') {
-		res.setHeader('Content-Encoding', 'gzip');
+		res.setHeader('content-encoding', 'gzip');
 		zlib.gzip(JSON.stringify(result), function (_, resultzip) {  // The callback will give you the 
 			res.send(resultzip);
 		});  
 	  } else {
 		res.send(result);	
-		}		
+	  }		
 		
   }).listen(PORT, () => console.log(`Listening on ${ PORT }`))
