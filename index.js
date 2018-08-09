@@ -3,7 +3,7 @@ const path = require('path')
 const PORT = process.env.PORT || 5000
 var result = {"LOCATION_FORMAT ":["ID","LONGITUDE","LATITUDE","TIMESTAMP","VELOCITY","DIRECTION","COUNTRY CODE","EURO VALUE","MTM"]
 ,"LOCATION":[]}
-var pos =["3156490059059000000",6.145409,51.381982,"2017-08-09T05:33:15Z",44,27546,"FR",4,3800]
+
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
@@ -11,7 +11,7 @@ express()
   .set('view engine', 'ejs')
   .get('/', function(req, res) {if ((!req.query.maxAge) || (req.query.maxAge> 300)) {occurence=300;} else {occurence=req.query.maxAge;}
   result.LOCATION=[];
-  for (var i = 0; i < occurence * 1700000 / (60 * (5+Math.random())); i++) {
+  for (var i = 0; i < occurence * 1700000 / (300 * (1+Math.random())); i++) {
 	dt=new Date();
 	dt.setHours(dt.getHours()-11);
 	if (dt.getMonth()<10) {
@@ -41,8 +41,7 @@ express()
 	}
 	dateTxt+='Z'						
 	
-	result.LOCATION.push(pos);
-	result.LOCATION[i][4]=dateTxt;
+	result.LOCATION.push(["3156490059059000000",6.145409,51.381982,dateTxt,44,27546,"FR",4,3800]);
 	
   }
   res.send(result)})
