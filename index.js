@@ -11,11 +11,9 @@ express()
   .set('view engine', 'ejs')
   .get('/', function(req, res) {if ((!req.query.maxAge) || (req.query.maxAge> 300)) {occurence=300;} else {occurence=req.query.maxAge;}
   result.LOCATION=[];
-  dt=new Date();
-  nb = dt.getSeconds();
-  for (var i = 0; i < occurence * 1700000 / (250 + nb); i++) {
+  for (var i = 0; i < occurence * 1700000 / (60 * (5+Math.random())); i++) {
 	dt=new Date();
-	dt.setSeconds(dt.getSeconds()-30);
+	dt.setHours(dt.getHours()-11);
 	if (dt.getMonth()<10) {
 		dateTxt=dt.getFullYear()+'-0'+dt.getMonth()
 	} else {
@@ -42,8 +40,10 @@ express()
 		dateTxt+=':'+dt.getSeconds()
 	}
 	dateTxt+='Z'						
-	pos[4]=dateTxt;  
+	
 	result.LOCATION.push(pos);
+	result.LOCATION[i][4]=dateTxt;
+	
   }
   res.send(result)})
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
