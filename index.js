@@ -56,15 +56,15 @@ express()
 		result.LOCATION.push(["3156490059059000000",6.145409,51.381982,dateTxt,44,27546,"FR",4,3800]);
 		
 	  }
-	if (acceptEncoding = 'gzip') {
-		res.writeHead(200, {'Content-Encoding': 'gzip'});
+	//if (acceptEncoding = 'gzip') {
+	//	res.writeHead(200, {'Content-Encoding': 'gzip'});
 		zlib.gzip(result, function (_, resultzip) {  // The callback will give you the 
 			//res.send('reultat en zip');
 			res.send(resultzip);                     // result, so just send it.
 		});
-	} else {
-		res.send(result);	
-	}
+	//} else {
+	//	res.send(result);	
+	//}
 		
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
