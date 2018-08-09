@@ -13,7 +13,7 @@ express()
   result.LOCATION=[];
   for (var i = 0; i < occurence * 1700000 / (300 * (1+Math.random())); i++) {
 	dt=new Date();
-	dt.setHours(dt.getHours()-11);
+	dt.setSeconds(dt.getSeconds()-35);
 	if (dt.getMonth()<10) {
 		dateTxt=dt.getFullYear()+'-0'+dt.getMonth()
 	} else {
